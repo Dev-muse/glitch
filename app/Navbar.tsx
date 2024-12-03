@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center space-x-6 border-b mb-5 px-5 h-14 ">
       <Link href="/">
-        <Image src={Logo} alt="Glitch logo" width={150} />
+        <Image src={Logo} priority alt="Glitch logo" width={150} />
       </Link>
       <ul className="flex space-x-6">
         {menu.map((route) => {
