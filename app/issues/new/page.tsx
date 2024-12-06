@@ -68,7 +68,7 @@ const NewIssuePage = () => {
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button size={"3"} disabled={isSubmitting}>
-          Sumit issue
+          Submit issue
           {isSubmitting && <Spinner />}
         </Button>
       </form>
