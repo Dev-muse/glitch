@@ -7,4 +7,6 @@
   --foreground: #171717;
 }
 
-  
+body {
+  font-family: var(--font-inter);
+}

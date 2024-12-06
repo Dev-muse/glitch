@@ -15,7 +15,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Glitch App",
-  description: "Generated a bug report in an instant and resolve it promptly.",
+  description: "Generate and resolve a bug report in an instant.",
 };
 
 export default function RootLayout({
