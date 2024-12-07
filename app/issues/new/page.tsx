@@ -1,24 +1,29 @@
 "use client";
 
-import { Button, Callout, Text, TextField } from "@radix-ui/themes";
+import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
+import { createIssueSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import SimpleMDE from "react-simplemde-editor";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
-import delay from "delay";
 
 // infer issue form type from zod schema
 type IssueForm = z.infer<typeof createIssueSchema>;
 
-const NewIssuePage = async () => {
+// lazy loading mde editor , default all components rendered on server , but editor uses browser api like next/navigation;
+// set ssr to false to not render component on
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
+
+const NewIssuePage = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -31,6 +36,7 @@ const NewIssuePage = async () => {
     // used hookform resolvers to integrate react-hook-form with outside validators like zod
     resolver: zodResolver(createIssueSchema),
   });
+
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
