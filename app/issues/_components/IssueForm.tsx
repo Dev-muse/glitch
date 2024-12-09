@@ -8,7 +8,6 @@ import { Issue } from "@prisma/client";
 import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -20,9 +19,10 @@ type IssueFormData = z.infer<typeof issueSchema>;
 
 // lazy loading mde editor , default all components rendered on server , but editor uses browser api like next/navigation;
 // set ssr to false to not render component on
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
+// const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+//   ssr: false,
+// });
+import SimpleMDE from "react-simplemde-editor";
 
 interface Props {
   issue?: Issue;
