@@ -2,7 +2,7 @@
 
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
-import { createIssueSchema } from "@/app/validationSchemas";
+import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Issue } from "@prisma/client";
 import { Button, Callout, TextField } from "@radix-ui/themes";
@@ -16,7 +16,7 @@ import { MdErrorOutline } from "react-icons/md";
 import { z } from "zod";
 
 // infer issue form type from zod schema
-type IssueFormData = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 // lazy loading mde editor , default all components rendered on server , but editor uses browser api like next/navigation;
 // set ssr to false to not render component on
@@ -39,7 +39,7 @@ const IssueForm = ({ issue }: Props) => {
     formState: { errors },
   } = useForm<IssueFormData>({
     // used hookform resolvers to integrate react-hook-form with outside validators like zod
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
 
   const router = useRouter();
