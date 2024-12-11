@@ -11,7 +11,7 @@ const Navbar = () => {
   const currentPath = usePathname();
   const menu = [
     { href: "/", label: "Dashboard" },
-    { href: "/issues", label: "Issues" },
+    { href: "/issues/list", label: "Issues" },
   ];
 
   return (
